@@ -3,7 +3,6 @@ FROM rockylinux:8.9
 ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="3.22.2"
 
 
-
 # Install Boost libraries
 COPY ./install_boost_libs_from_src.sh /tmp/
 RUN chmod +x /tmp/install_boost_libs_from_src.sh && /tmp/install_boost_libs_from_src.sh \
@@ -29,22 +28,46 @@ COPY ./get_latest_clangd.sh /tmp/
 RUN chmod +x /tmp/get_latest_clangd.sh && /tmp/get_latest_clangd.sh \
 && rm -f /tmp/get_latest_clangd.sh
 
-# fix problem with cr/lf under windows-linux developement.
-RUN git config --global core.autocrlf input
-
 # enable huge pages
 RUN mkdir /hugetlbfs && \
     echo "hugetlbfs /hugetlbfs hugetlbfs defaults 0 0" >> /etc/fstab
 
+# setup user of devcontainer
+# Define the ARG for username (with a default value)
+ARG USERNAME=me
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+
+# Create the user and group
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+
+# [Optional] Add the user to sudoers (if needed)
+RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+
 # persist bash history
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/local_store/.bash_history" \
-    && echo "$SNIPPET" >> "/root/.bashrc"
+    && echo "$SNIPPET" >> "/home/$USERNAME/.bashrc"
+
+# setup volume for local caches and settings
+RUN mkdir -p /local_store && \
+    chown $USERNAME:$USERNAME /local_store
+# VOLUME ["/local_store"]
+
+# set user
+USER $USERNAME
 
 # ssh credentials for scp
-COPY ./ssh_config /root/.ssh/config
+# COPY --chown=$USERNAME ./ssh_config /home/$USERNAME/.ssh/config
+RUN ln -sf /local_store/.ssh /home/$USERNAME/.ssh
+RUN ln -sf /local_store/.gitconfig "/home/$USERNAME/.gitconfig"
+RUN mkdir -p /home/$USERNAME/.config && chown $USERNAME:$USERNAME /home/$USERNAME/.config && \
+    ln -sf /local_store/nvim_config /home/$USERNAME/.config/nvim
+
 
 # setup pretty printers for gdb
-COPY ./.gdbinit /root/
+COPY --chown=$USERNAME ./.gdbinit /home/$USERNAME/
 
 # setup colors in bash
 COPY ./.add_to_bash_rc /tmp/
@@ -52,12 +75,3 @@ RUN cat /tmp/.add_to_bash_rc >> ~/.bashrc
 
 WORKDIR /workspaces
 
-#TODO https://github.com/microsoft/vscode-remote-try-cpp/blob/main/.devcontainer/reinstall-cmake.sh
-## reinstall cmake version 3.6
-
-# [Optional] Uncomment this section to install additional vcpkg ports.
-# RUN su vscode -c "${VCPKG_ROOT}/vcpkg install <your-port-name-here>"
-
-# [Optional] Uncomment this section to install additional packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>

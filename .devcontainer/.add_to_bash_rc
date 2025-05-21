@@ -64,15 +64,13 @@ fi
 # setup XDG variables for Neovim
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME='/local_store/XDG/data'
-#export XDG_RUNTIME_DIR='/local_store/XDG/runtime'
+export XDG_RUNTIME_DIR='/local_store/XDG/runtime'
 export XDG_STATE_HOME='/local_store/XDG/state'
 export XDG_CACHE_HOME='/local_store/XDG/cache'
 export XDG_DATA_DIRS='/local_store/XDG/data_dirs'
 export NVIM_LOG_FILE='/local_store/nvim_log'
 
 touch /local_store/.gitconfig
-ln -sf /local_store/.gitconfig "$HOME/.gitconfig"
-
 
 # some more ls aliases
 alias ll='ls -alF'
