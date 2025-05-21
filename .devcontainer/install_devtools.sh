@@ -4,6 +4,7 @@
 set -e
 
 dnf update -y
+dnf -y install epel-release
 dnf groupinstall 'Development Tools' -y
 dnf install -y gcc-c++ compat-openssl10 cmake \
     java-11-openjdk java-11-openjdk-devel \
@@ -12,8 +13,11 @@ dnf install -y gcc-c++ compat-openssl10 cmake \
     systemtap-sdt-devel \
     iproute \
     rsync vim \
+    passwd man sudo \
+    htop atop \
     # clang-tools-extra
 
+# systemctl enable --now atop
 dnf --enablerepo=powertools -y install libstdc++-static \
     svn
 
