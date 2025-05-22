@@ -1,3 +1,5 @@
+dnf install -y gcc make git ripgrep fd-find unzip
+
 cd /tmp
 git clone --depth=1 --branch stable https://github.com/neovim/neovim
 cd neovim
