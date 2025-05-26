@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 
 # Exit immediately if any command exits with a non-zero status (i.e., it fails).
 set -e
@@ -14,7 +14,7 @@ dnf install -y gcc-c++ compat-openssl10 cmake \
     iproute \
     rsync vim \
     passwd man sudo \
-    htop atop \
+    htop atop tmux \
     # clang-tools-extra
 
 # systemctl enable --now atop

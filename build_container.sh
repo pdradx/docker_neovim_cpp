@@ -8,6 +8,7 @@ docker build -t $IMAGE_NAME ./.devcontainer
 docker rm --force $CONTAINER_NAME
 
 docker run -d \
+    --privileged \
     --name $CONTAINER_NAME \
 	--mount type=bind,src=$HOME/projects,dst=/workspaces \
 	--mount type=volume,src=neovim-cpp-local-store,dst=/local_store  \
