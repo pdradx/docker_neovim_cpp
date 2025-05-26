@@ -3,6 +3,7 @@
 IMAGE_NAME=docker-neovim-cpp
 CONTAINER_NAME=neovim-cpp
 
+# docker build --no-cache -t $IMAGE_NAME ./.devcontainer
 docker build -t $IMAGE_NAME ./.devcontainer
 
 docker rm --force $CONTAINER_NAME
