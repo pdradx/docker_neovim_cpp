@@ -73,5 +73,15 @@ COPY --chown=$USERNAME ./.gdbinit /home/$USERNAME/
 COPY ./.add_to_bash_rc /tmp/
 RUN cat /tmp/.add_to_bash_rc >> ~/.bashrc
 
+# Copy entrypoint script
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN sudo chmod +x /usr/local/bin/docker-entrypoint.sh
+
+# Set entrypoint
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+
+# Default command (can be overridden)
+CMD ["/bin/bash"]
+
 WORKDIR /workspaces
 
