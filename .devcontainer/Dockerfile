@@ -62,6 +62,7 @@ USER $USERNAME
 # COPY --chown=$USERNAME ./ssh_config /home/$USERNAME/.ssh/config
 RUN ln -sf /local_store/.ssh /home/$USERNAME/.ssh
 RUN ln -sf /local_store/.gitconfig "/home/$USERNAME/.gitconfig"
+RUN ln -sf /local_store/XDG/cache "/home/$USERNAME/.cache"
 RUN mkdir -p /home/$USERNAME/.config && chown $USERNAME:$USERNAME /home/$USERNAME/.config && \
     ln -sf /local_store/nvim_config /home/$USERNAME/.config/nvim
 
@@ -72,6 +73,9 @@ COPY --chown=$USERNAME ./.gdbinit /home/$USERNAME/
 # setup colors in bash
 COPY ./.add_to_bash_rc /tmp/
 RUN cat /tmp/.add_to_bash_rc >> ~/.bashrc
+
+# setup tmux
+COPY --chown=$USERNAME ./.tmux.conf /home/$USERNAME/
 
 # Copy entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/
