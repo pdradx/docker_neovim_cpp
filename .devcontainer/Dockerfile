@@ -77,6 +77,9 @@ RUN cat /tmp/.add_to_bash_rc >> ~/.bashrc
 # setup tmux
 COPY --chown=$USERNAME ./.tmux.conf /home/$USERNAME/
 
+# config for lazygit
+COPY --chown=$USERNAME ./lazygit_config.yml /home/$USERNAME/.config/lazygit/config.yml
+
 # Copy entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN sudo chmod +x /usr/local/bin/docker-entrypoint.sh
