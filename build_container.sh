@@ -16,6 +16,7 @@ docker run -d \
 	--mount "type=bind,source=$HOME/.config/nvim,target=/local_store/nvim_config" \
 	--mount "type=bind,source=$HOME/.ssh,target=/local_store/.ssh" \
 	--memory=6gb \
+    --memory-swap=-1 \
 	--hostname=neovim_cpp \
     $IMAGE_NAME \
     tail -f /dev/null
