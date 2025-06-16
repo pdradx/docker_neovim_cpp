@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 set -e
-dnf update -y
-dnf groupinstall "Development Tools" -y
-dnf install wget bzip2 tar xz gcc gcc-c++ make -y
+dnf -y update
+dnf -y groupinstall "Development Tools"
+dnf -y install wget bzip2 tar xz gcc gcc-c++ make
 # TODO check weter CMake works much more faster without ninja-build under a docker in windows wsl??!!!
-# dnf --enablerepo=powertools -y install ninja-build
+dnf -y --enablerepo=powertools install ninja-build
 
 mkdir /tmp/boost_src
 cd /tmp/boost_src
