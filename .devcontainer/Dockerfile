@@ -59,7 +59,6 @@ RUN mkdir -p /local_store && \
 USER $USERNAME
 
 # ssh credentials for scp
-# COPY --chown=$USERNAME ./ssh_config /home/$USERNAME/.ssh/config
 RUN ln -sf /local_store/.ssh /home/$USERNAME/.ssh
 RUN ln -sf /local_store/.gitconfig "/home/$USERNAME/.gitconfig"
 RUN ln -sf /local_store/XDG/cache "/home/$USERNAME/.cache"
