@@ -25,12 +25,15 @@ RUN chmod +x /tmp/install_neovim_from_src.sh && /tmp/install_neovim_from_src.sh 
 
 # Install clangd
 COPY ./get_latest_clangd.sh /tmp/
-RUN chmod +x /tmp/get_latest_clangd.sh && /tmp/get_latest_clangd.sh \
-&& rm -f /tmp/get_latest_clangd.sh
+RUN chmod +x /tmp/get_latest_clangd.sh && /tmp/get_latest_clangd.sh && rm -f /tmp/get_latest_clangd.sh
 
 # enable huge pages
 RUN mkdir /hugetlbfs && \
     echo "hugetlbfs /hugetlbfs hugetlbfs defaults 0 0" >> /etc/fstab
+
+COPY ./sf-109585-ls-47-openonload-release-package/onload-9.0.2.140.tgz /tmp/
+COPY ./install_openonload.sh /tmp/
+RUN chmod +x /tmp/install_openonload.sh && /tmp/install_openonload.sh && rm -f /tmp/install_openonload.sh
 
 # setup user of devcontainer
 # Define the ARG for username (with a default value)
