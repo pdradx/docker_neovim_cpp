@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
+set -ex  # Exit on error (-e) and print each command (-x) for debugging
 
 IMAGE_NAME=docker-neovim-cpp
 CONTAINER_NAME=neovim-cpp
 
-# docker build --no-cache -t $IMAGE_NAME ./.devcontainer
-docker build -t $IMAGE_NAME ./.devcontainer
+# docker build --progress=plain --no-cache -t $IMAGE_NAME ./.devcontainer
+docker build --progress=plain -t $IMAGE_NAME ./.devcontainer
 
 docker rm --force $CONTAINER_NAME
 

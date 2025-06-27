@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -ex  # Exit on error (-e) and print each command (-x) for debugging
 
 CONTAINER_NAME=neovim-cpp
 

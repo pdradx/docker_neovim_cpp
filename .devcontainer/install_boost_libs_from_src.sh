@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
+set -ex  # Exit on error (-e) and print each command (-x) for debugging
 
-set -e
 dnf -y update
 dnf -y groupinstall "Development Tools"
 dnf -y install wget bzip2 tar xz gcc gcc-c++ make

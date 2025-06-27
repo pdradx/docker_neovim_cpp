@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
+set -ex  # Exit on error (-e) and print each command (-x) for debugging
 
-set -e
 dnf -y install libcap-devel libmnl-devel
 
 mkdir -p /tmp/openonload_tmp

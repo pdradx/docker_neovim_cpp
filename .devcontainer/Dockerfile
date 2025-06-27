@@ -3,6 +3,19 @@ FROM rockylinux:8.9
 ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="3.22.2"
 
 
+#Install GCC compiler from sources
+# COPY ./install_gcc_from_src.sh /tmp/
+# RUN chmod +x /tmp/install_gcc_from_src.sh && /tmp/install_gcc_from_src.sh \
+#     && rm -f /tmp/install_gcc_from_src.sh
+# COPY ./install_latest_gcc_from_src.sh /tmp/
+# RUN chmod +x /tmp/install_latest_gcc_from_src.sh && /tmp/install_latest_gcc_from_src.sh \
+#     && rm -f /tmp/install_latest_gcc_from_src.sh
+
+# Install gcc as toolset
+COPY ./install_gcc_as_toolset.sh /tmp/
+RUN chmod +x /tmp/install_gcc_as_toolset.sh && /tmp/install_gcc_as_toolset.sh \
+    && rm -f /tmp/install_gcc_as_toolset.sh
+
 # Install Boost libraries
 COPY ./install_boost_libs_from_src.sh /tmp/
 RUN chmod +x /tmp/install_boost_libs_from_src.sh && /tmp/install_boost_libs_from_src.sh \

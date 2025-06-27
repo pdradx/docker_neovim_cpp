@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-
-# Exit immediately if any command exits with a non-zero status (i.e., it fails).
-set -e
+set -ex  # Exit on error (-e) and print each command (-x) for debugging
 
 git clone --depth=1 https://github.com/llvm/llvm-project.git
 
