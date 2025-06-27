@@ -16,7 +16,7 @@ tar --bzip2 -xf $boost_arch_name
 cd $boost_name
 # get the no of cpucores to make faster
 cpuCores=`cat /proc/cpuinfo | grep "siblings" | uniq | awk '{print $NF}'`
-echo "Available CPU cores: "$cpuCores/
+echo "Available CPU cores: "$cpuCores
 ./bootstrap.sh  # this will generate ./b2
 ./b2 --with=all -j $cpuCores install
 
