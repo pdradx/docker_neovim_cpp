@@ -4,6 +4,8 @@ RUN dnf -y update
 RUN dnf -y groupinstall "Development Tools"
 RUN dnf -y install wget bzip2 tar xz gcc gcc-c++ make
 RUN dnf -y --enablerepo=powertools install ninja-build
+RUN dnf -y install epel-release
+RUN dnf -y install glib2-devel cppzmq-devel
 
 #Install GCC compiler from sources
 # COPY ./install_gcc_from_src.sh /tmp/
@@ -46,9 +48,14 @@ RUN chmod +x /tmp/get_latest_clangd.sh && /tmp/get_latest_clangd.sh && rm -f /tm
 RUN mkdir /hugetlbfs && \
     echo "hugetlbfs /hugetlbfs hugetlbfs defaults 0 0" >> /etc/fstab
 
+# Install openonload userfiles
 COPY ./sf-109585-ls-47-openonload-release-package/onload-9.0.2.140.tgz /tmp/
 COPY ./install_openonload.sh /tmp/
 RUN chmod +x /tmp/install_openonload.sh && /tmp/install_openonload.sh && rm -f /tmp/install_openonload.sh
+
+# Install exanic bin libs
+COPY ./install_exanic.sh /tmp/
+RUN chmod +x /tmp/install_exanic.sh && /tmp/install_exanic.sh && rm -f /tmp/install_exanic.sh
 
 # setup user of devcontainer
 # Define the ARG for username (with a default value)
