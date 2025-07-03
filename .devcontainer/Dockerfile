@@ -1,7 +1,9 @@
 FROM rockylinux:8.9
 
-ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="3.22.2"
-
+RUN dnf -y update
+RUN dnf -y groupinstall "Development Tools"
+RUN dnf -y install wget bzip2 tar xz gcc gcc-c++ make
+RUN dnf -y --enablerepo=powertools install ninja-build
 
 #Install GCC compiler from sources
 # COPY ./install_gcc_from_src.sh /tmp/
