@@ -57,6 +57,10 @@ RUN chmod +x /tmp/install_openonload.sh && /tmp/install_openonload.sh && rm -f /
 COPY ./install_exanic.sh /tmp/
 RUN chmod +x /tmp/install_exanic.sh && /tmp/install_exanic.sh && rm -f /tmp/install_exanic.sh
 
+RUN dnf -y install openssh-server
+RUN mkdir /var/run/sshd
+RUN ssh-keygen -A
+
 # setup user of devcontainer
 # Define the ARG for username (with a default value)
 ARG USERNAME=me
@@ -66,6 +70,7 @@ ARG USER_GID=$USER_UID
 # Create the user and group
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+RUN echo "zzz123" | passwd --stdin $USERNAME
 
 # [Optional] Add the user to sudoers (if needed)
 RUN echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
