@@ -6,6 +6,7 @@ RUN dnf -y install wget bzip2 tar xz gcc gcc-c++ make
 RUN dnf -y --enablerepo=powertools install ninja-build
 RUN dnf -y install epel-release
 RUN dnf -y install glib2-devel cppzmq-devel
+RUN dnf -y install tcpreplay
 
 #Install GCC compiler from sources
 # COPY ./install_gcc_from_src.sh /tmp/
