@@ -20,6 +20,7 @@ docker run -d \
     --memory=16gb \
     --memory-swap=-1 \
     --hostname=neovim_cpp \
+    --cap-add=NET_RAW \
     $IMAGE_NAME \
     sudo /usr/sbin/sshd -D
     # tail -f /dev/null
