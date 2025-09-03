@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ex  # Exit on error (-e) and print each command (-x) for debugging
+set -ex # Exit on error (-e) and print each command (-x) for debugging
 
 dnf update -y
 dnf -y install epel-release
@@ -12,12 +12,11 @@ dnf install -y gcc-c++ compat-openssl10 cmake \
     iproute \
     rsync vim \
     passwd man sudo \
-    htop atop tmux \
-    # clang-tools-extra
+    htop atop tmux
+# clang-tools-extra
 
 # systemctl enable --now atop
-dnf --enablerepo=powertools -y install libstdc++-static \
-    svn
+dnf --enablerepo=powertools -y install libstdc++-static glibc-static svn
 
 alternatives --set java /usr/lib/jvm/java-11-openjdk-11.0.25.0.9-2.el8.x86_64/bin/java
 
@@ -36,5 +35,3 @@ cd /root/TMP && tar xzvf $LG_ARCHIVE && mv $LG /usr/bin/
 
 # Delete TMP directory
 rm -rf /root/TMP
-
-
