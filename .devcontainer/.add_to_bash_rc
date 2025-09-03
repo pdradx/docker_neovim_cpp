@@ -80,6 +80,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
+alias lvim='NVIM_APPNAME=lazy_vim nvim'
 
 export TERM="xterm-256color"
+export PATH=$PATH:~/.cargo/bin/
 

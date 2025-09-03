@@ -95,7 +95,11 @@ RUN ln -sf /local_store/.gitconfig "/home/$USERNAME/.gitconfig"
 RUN ln -sf /local_store/XDG/cache "/home/$USERNAME/.cache"
 RUN mkdir -p /home/$USERNAME/.config && chown $USERNAME:$USERNAME /home/$USERNAME/.config && \
     ln -sf /local_store/nvim_config /home/$USERNAME/.config/nvim
+RUN ln -sf /local_store/lazy_vim /home/$USERNAME/.config/lazy_vim
 
+# Install cargo and stylua
+RUN sudo dnf install -y cargo
+RUN cargo install stylua
 
 # setup pretty printers for gdb
 COPY --chown=$USERNAME ./.gdbinit /home/$USERNAME/
