@@ -101,6 +101,10 @@ RUN ln -sf /local_store/lazy_vim /home/$USERNAME/.config/lazy_vim
 RUN sudo dnf install -y cargo
 RUN cargo install stylua
 
+# Install tree-sitter-cli dependencies
+RUN cargo install --locked tree-sitter-cli
+RUN sudo dnf install -y nodejs npm
+
 # setup pretty printers for gdb
 COPY --chown=$USERNAME ./.gdbinit /home/$USERNAME/
 
