@@ -98,7 +98,11 @@ RUN mkdir -p /home/$USERNAME/.config && chown $USERNAME:$USERNAME /home/$USERNAM
 RUN ln -sf /local_store/lazy_vim /home/$USERNAME/.config/lazy_vim
 
 # Install cargo and stylua
-RUN sudo dnf install -y cargo
+RUN sudo dnf install -y curl
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain stable
+ENV PATH="/home/$USERNAME/.cargo/bin:${PATH}"
+
+RUN rustup update
 RUN cargo install stylua
 
 # Install tree-sitter-cli dependencies
