@@ -15,6 +15,11 @@ dnf install -y gcc-c++ compat-openssl10 cmake \
     htop atop tmux
 # clang-tools-extra
 
+dnf install -y cpputest-devel
+
+# .NET SDK
+dnf install -y dotnet-sdk-9.0
+
 # systemctl enable --now atop
 dnf --enablerepo=powertools -y install libstdc++-static glibc-static svn
 
