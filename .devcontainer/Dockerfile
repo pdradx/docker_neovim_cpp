@@ -45,9 +45,9 @@ RUN chmod +x /tmp/install_neovim_from_src.sh && /tmp/install_neovim_from_src.sh 
 COPY ./get_latest_clangd.sh /tmp/
 RUN chmod +x /tmp/get_latest_clangd.sh && /tmp/get_latest_clangd.sh && rm -f /tmp/get_latest_clangd.sh
 
-# enable huge pages
-RUN mkdir /hugetlbfs && \
-    echo "hugetlbfs /hugetlbfs hugetlbfs defaults 0 0" >> /etc/fstab
+# # enable huge pages
+# RUN mkdir /hugetlbfs && \
+#     echo "hugetlbfs /hugetlbfs hugetlbfs defaults 0 0" >> /etc/fstab
 
 # Install openonload userfiles
 COPY ./sf-109585-ls-47-openonload-release-package/onload-9.0.2.140.tgz /tmp/

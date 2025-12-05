@@ -9,7 +9,7 @@
     "TZ": "Asia/Omsk"
   },
   "privileged": true,
-  "postStartCommand": "sysctl -w vm.nr_hugepages=300 && mount /hugetlbfs",
+  // "postStartCommand": "sysctl -w vm.nr_hugepages=300 && mount /hugetlbfs",
   // mount hugetlbfs
 
   // Features to add to the dev container. More info: https://containers.dev/features.

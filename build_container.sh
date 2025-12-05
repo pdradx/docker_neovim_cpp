@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ex  # Exit on error (-e) and print each command (-x) for debugging
+set -ex # Exit on error (-e) and print each command (-x) for debugging
 
 IMAGE_NAME=docker-neovim-cpp
 CONTAINER_NAME=neovim-cpp
@@ -13,6 +13,7 @@ docker run -d \
     --privileged \
     -p 2000:22 \
     --name $CONTAINER_NAME \
+    --mount type=bind,src=/dev/hugepages,dst=/dev/hugepages \
     --mount type=bind,src=$HOME/projects,dst=/workspaces \
     --mount type=volume,src=neovim-cpp-local-store,dst=/local_store  \
     --mount "type=bind,source=$HOME/.config/nvim,target=/local_store/nvim_config" \
@@ -23,7 +24,4 @@ docker run -d \
     --cap-add=NET_RAW \
     $IMAGE_NAME \
     sudo /usr/sbin/sshd -D
-    # tail -f /dev/null
-
-
-
+# tail -f /dev/null
