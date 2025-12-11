@@ -107,7 +107,9 @@ RUN cargo install stylua
 
 # Install tree-sitter-cli dependencies
 RUN cargo install --locked tree-sitter-cli
-RUN sudo dnf install -y nodejs npm
+# RUN sudo dnf install -y nodejs npm
+# Install more fresh nodejs and npm
+RUN sudo dnf -y module install nodejs:18
 
 # setup pretty printers for gdb
 COPY --chown=$USERNAME ./.gdbinit /home/$USERNAME/
