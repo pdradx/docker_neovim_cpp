@@ -105,6 +105,8 @@ ENV PATH="/home/$USERNAME/.cargo/bin:${PATH}"
 RUN rustup update
 RUN cargo install stylua
 
+# Add clangd dependency for tree-sitter-cli compilation
+RUN sudo dnf -y install clangd
 # Install tree-sitter-cli dependencies
 RUN cargo install --locked tree-sitter-cli
 # RUN sudo dnf install -y nodejs npm
