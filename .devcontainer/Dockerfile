@@ -113,6 +113,9 @@ RUN cargo install --locked tree-sitter-cli
 # Install more fresh nodejs and npm
 RUN sudo dnf -y module install nodejs:18
 
+RUN sudo dnf -y copr enable upaaa/mscp 
+RUN sudo dnf -y install mscp
+
 # setup pretty printers for gdb
 COPY --chown=$USERNAME ./.gdbinit /home/$USERNAME/
 
