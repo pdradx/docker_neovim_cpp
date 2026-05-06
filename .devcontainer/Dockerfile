@@ -3,10 +3,12 @@ FROM rockylinux:8.9
 RUN dnf -y update
 RUN dnf -y groupinstall "Development Tools"
 RUN dnf -y install wget bzip2 tar xz gcc gcc-c++ make
+RUN dnf -y config-manager --set-enabled powertools
 RUN dnf -y --enablerepo=powertools install ninja-build
 RUN dnf -y install epel-release
-RUN dnf -y install glib2-devel cppzmq-devel
+RUN dnf -y install glib2-static glib2-devel cppzmq-devel
 RUN dnf -y install tcpreplay
+RUN dnf -y install fzf
 
 #Install GCC compiler from sources
 # COPY ./install_gcc_from_src.sh /tmp/
@@ -111,7 +113,7 @@ RUN sudo dnf -y install clangd
 RUN cargo install --locked tree-sitter-cli
 # RUN sudo dnf install -y nodejs npm
 # Install more fresh nodejs and npm
-RUN sudo dnf -y module install nodejs:18
+RUN sudo dnf -y module install nodejs:24/development
 
 RUN sudo dnf -y copr enable upaaa/mscp 
 RUN sudo dnf -y install mscp
