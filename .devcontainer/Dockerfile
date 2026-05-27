@@ -4,7 +4,7 @@ RUN dnf -y update
 RUN dnf -y groupinstall "Development Tools"
 RUN dnf -y install wget bzip2 tar xz gcc gcc-c++ make
 RUN dnf -y config-manager --set-enabled powertools
-RUN dnf -y --enablerepo=powertools install ninja-build
+RUN dnf -y install ninja-build
 RUN dnf -y install epel-release
 RUN dnf -y install glib2-static glib2-devel cppzmq-devel
 RUN dnf -y install tcpreplay
