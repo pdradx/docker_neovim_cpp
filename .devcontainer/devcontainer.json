@@ -2,7 +2,6 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/cpp
 {
   "name": "neovim-cpp",
-  "image": "docker-neovim-cpp",
   "build": {
     "dockerfile": "Dockerfile"
   },
