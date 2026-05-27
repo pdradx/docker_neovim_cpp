@@ -73,6 +73,8 @@ export XDG_CACHE_HOME='/local_store/XDG/cache'
 export XDG_DATA_DIRS='/local_store/XDG/data_dirs'
 export NVIM_LOG_FILE='/local_store/nvim_log'
 
+mkdir -p $XDG_RUNTIME_DIR
+
 touch /local_store/.gitconfig
 
 # some more ls aliases
