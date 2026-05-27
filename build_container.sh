@@ -22,7 +22,8 @@ docker run -d \
     --memory-swap=-1 \
     --hostname=neovim_cpp \
     --cap-add=NET_RAW \
-    --userns=keep-id \
     $IMAGE_NAME \
     sudo /usr/sbin/sshd -D
+
+    # --userns=keep-id \ # add for podman container only!
 # tail -f /dev/null
