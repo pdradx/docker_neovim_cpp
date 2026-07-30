@@ -7,6 +7,9 @@ set -ex  # Exit on error (-e) and print each command (-x) for debugging
 # sudo mount -t hugetlbfs hugetlbfs /hugetlbfs
 # sudo chmod 0777 /hugetlbfs
 
+# Generate ssh keys for open ssh
+sudo ssh-keygen -A
+
 sudo rm -f /run/nologin
 
 # Execute the main command

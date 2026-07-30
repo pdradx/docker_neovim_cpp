@@ -40,6 +40,7 @@ run_args=(
     --mount type=bind,src=/dev/hugepages,dst=/dev/hugepages
     --mount type=bind,src=$HOME/projects,dst=/workspaces
     --mount type=volume,src=neovim-cpp-local-store,dst=/local_store 
+    --mount type=volume,src=neovim-cpp-ssh-store,dst=/etc/ssh 
     --mount "type=bind,source=$HOME/.config/nvim,target=/local_store/nvim_config"
     --mount "type=bind,source=$HOME/.ssh,target=/local_store/.ssh"
     --memory=16gb

@@ -62,7 +62,9 @@ RUN chmod +x /tmp/install_exanic.sh && /tmp/install_exanic.sh && rm -f /tmp/inst
 
 RUN dnf -y install openssh-server
 RUN mkdir /var/run/sshd
-RUN ssh-keygen -A
+
+# Now ssh keys generation moved to ENTRYPOINT to preserve ssh keys between container rebuilds
+# RUN ssh-keygen -A 
 
 # setup user of devcontainer
 # Define the ARG for username (with a default value)
