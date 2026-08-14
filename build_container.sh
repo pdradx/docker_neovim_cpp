@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-set -ex # Exit on error (-e) and print each command (-x) for debugging
+set -euo pipefail # Exit on error (-e) and print each command (-x) for debugging
 
-IMAGE_NAME=docker-neovim-cpp
-CONTAINER_NAME=neovim-cpp
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/config.sh"
 
 # docker build --progress=plain --no-cache -t $IMAGE_NAME ./.devcontainer
 docker build --progress=plain -t $IMAGE_NAME ./.devcontainer
